@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>ZenBuy – Cloud Commerce Platform</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
+            rel="stylesheet">
+        <style>
+*{box-sizing:border-box;font-family:'Inter',sans-serif}
+body{
+margin:0;
+background:linear-gradient(135deg,#f6f7fb,#eef2ff,#fdfefe);
+color:#111827;
+}
+
+/* Floating pastel clouds */
+.pastel{
+position:fixed;inset:-50%;
+background:
+radial-gradient(circle at 20% 30%, #dbeafe 0%, transparent 40%),
+radial-gradient(circle at 80% 70%, #fef3c7 0%, transparent 45%),
+radial-gradient(circle at 50% 50%, #ede9fe 0%, transparent 50%);
+animation:float 26s ease-in-out infinite alternate;
+z-index:-1;
+}
+@keyframes float{
+from{transform:translate(-8%,-8%)}
+to{transform:translate(8%,8%)}
+}
+
+/* NAV */
+.nav{
+display:flex;justify-content:space-between;align-items:center;
+padding:22px 70px;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(18px);
+border-bottom:1px solid #e5e7eb;
+}
+.nav img{height: 75px; cursor: pointer;}
+.nav div{color:#6b7280;display:flex;justify-content: center;align-items: center; gap: 21px; cursor: pointer; font-weight: 700;font-size: 17px;}
+
+/* HERO */
+.hero{display:flex;min-height:90vh}
+.hero-left{flex:1;padding:110px}
+.hero-left h1{font-size:54px;margin-bottom:14px}
+.hero-left p{max-width:480px;color:#4b5563;font-size:18px}
+
+/* FEATURES */
+.features{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:25px;margin-top:60px; text-transform: capitalize;
+}
+.feature{
+display: flex;justify-content: center;align-items: center;
+background:#fdfefe;border:1px solid #e5e7eb;
+padding:23px 17px;border-radius:19px;
+box-shadow:0 13px 31px rgba(0,0,0,.05);
+transition:all 0.3s ease-in-out;cursor: pointer; text-align: center;
+}
+.feature:hover{transform:translateY(-6px)}
+
+/* FORM */
+.hero-right{flex:1;display:flex;align-items:center;justify-content:center}
+.card{
+background:white;border:1px solid #e5e7eb;
+padding:49px;border-radius:28px;width:380px;
+box-shadow:0 30px 60px rgba(0,0,0,.08)
+}
+input{
+width:100%;padding:14px;border-radius:12px;border:1px solid #e5e7eb;
+margin:12px 0;font-size:15px
+}
+button{
+width:100%;padding:15px;border:none;border-radius:14px;
+background:#6366f1;color:white;font-weight:bold;font-size:16px;
+cursor:pointer;transition:.2s
+}
+button:hover{background:#4f46e5}
+.error{color:#ef4444;font-size:12px;display:none}
+
+/* FOOTER */
+.footer{padding:41px;display: flex;justify-content: center;align-items:center; gap: 17px;color:#6b7280;font-size:15px;font-weight: 700;text-transform: capitalize;}
+.footer p,.nav div p{transition: all 0.3s ease-in-out;}
+.footer p:hover,.nav div p:hover{text-decoration: underline;}
+</style>
+    </head>
+
+    <body>
+        <div class="pastel"></div>
+
+        <div class="nav">
+            <img src="./Time_Wise_Logo_LightMode.svg" alt="Logo">
+            <div><p>Products</p><p> Pricing</p><p> Docs </p><p>Login</p></div>
+        </div>
+
+        <div class="hero">
+            <div class="hero-left">
+                <h1>Commerce, beautifully simplified.</h1>
+                <p>ZenBuy is a modern cloud commerce platform that helps brands
+                    launch, manage and grow their online business with speed and
+                    confidence.</p>
+
+                <div class="features">
+                    <div class="feature">⚡ Fast store setup</div>
+                    <div class="feature">🔐 Secure checkout</div>
+                    <div class="feature">📈 Sales insights</div>
+                    <div class="feature">🌍 Global reach</div>
+                    <div class="feature">📦 Inventory sync</div>
+                    <div class="feature">🛡️ Fraud monitoring</div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="card">
+                    <h3>Create your account</h3>
+
+                    <input id="name" placeholder="Full Name">
+                    <div id="nameErr" class="error">Name required</div>
+
+                    <input id="email" placeholder="Work Email">
+                    <div id="emailErr" class="error">Invalid email</div>
+
+                    <input id="password" type="password" placeholder="Password">
+                    <div id="passErr" class="error">Minimum 6 characters</div>
+
+                    <button id="signupBtn" onclick="register()">Get
+                        Started</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p> © 2026 ZenBuy Technologies </p><p>All rights reserved</p>
+        </div>
+
+        <script>
+function register(){
+ let ok=true;
+ document.querySelectorAll(".error").forEach(e=>e.style.display="none");
+
+ let n = document.getElementById("name").value.trim();
+ let e = document.getElementById("email").value.trim();
+ let p = document.getElementById("password").value;
+
+ if(n===""){document.getElementById("nameErr").style.display="block";ok=false}
+ if(!e.includes("@")||!e.includes(".")){document.getElementById("emailErr").style.display="block";ok=false}
+ if(p.length<6){document.getElementById("passErr").style.display="block";ok=false}
+
+ if(ok){
+   localStorage.setItem("zenbuyUser",n);
+   window.location.href="home.html";
+ }
+}
+</script>
+    </body>
+</html>
